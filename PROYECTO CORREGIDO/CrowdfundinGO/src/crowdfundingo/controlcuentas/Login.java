@@ -13,27 +13,36 @@ import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+/**
+ * Clase Login.
+ */
 public class Login extends javax.swing.JFrame {
 
     crearcuenta crea = new crearcuenta();
     menuprinc prin = new menuprinc();
     modcuenta mod = new modcuenta();
     Conecccion conect = new Conecccion();
-
+/**
+ * Constructor Clase Login.
+ */
     public Login() {
         initComponents();
         setIconImage(getIconImage());
     }
-
+/**
+ * Metodo Obtiene Icono de Imagen.
+ */
+    @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
     }
-
+/**
+ * Metodo validacion
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */
     public void validar() throws SQLException, ClassNotFoundException {
         if ("".equals(user.getText())) {
             JOptionPane.showMessageDialog(null, "[ERROR] - Nombre de usuario en blanco");
@@ -52,7 +61,10 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }
-
+/**
+ * Metodo Obtiene nombre.
+     * @return 
+ */
     public String getNOMBRESG() {
         return conect.NOMBRESG;
     }
@@ -246,23 +258,18 @@ public class Login extends javax.swing.JFrame {
             //UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

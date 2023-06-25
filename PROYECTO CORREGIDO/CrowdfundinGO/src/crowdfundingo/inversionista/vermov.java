@@ -6,7 +6,6 @@
 package crowdfundingo.inversionista;
 
 import crowdfundingo.controladores.globalvars;
-import static crowdfundingo.inversionista.MostraProy.rand;
 import java.awt.*;
 import java.sql.*;
 import java.util.logging.Level;
@@ -30,12 +29,20 @@ public class vermov extends javax.swing.JFrame {
         opciones.add(activos);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
     }
-    
+/**
+ * Constructor de Clase.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void llenarTablaProy() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -46,7 +53,11 @@ public class vermov extends javax.swing.JFrame {
         System.out.println(rs);
         ProyTables.setModel(DbUtils.resultSetToTableModel(rs));
     }
-    
+/**
+ * Constructor de Clase.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void llenarTablaProyReem() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -57,7 +68,12 @@ public class vermov extends javax.swing.JFrame {
         System.out.println(rs);
         ProyTables.setModel(DbUtils.resultSetToTableModel(rs));
     }
-    
+/**
+ * Constructor de Clase.
+     * @param ID
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void reembolso(int ID) throws SQLException, ClassNotFoundException{
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -278,7 +294,9 @@ public class vermov extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Constructor de Clase.
+ */    
     private void reembolsarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reembolsarActionPerformed
         int opcion=JOptionPane.showConfirmDialog(null, "Confirmación", "¿Desea reembolsar?",JOptionPane.YES_NO_OPTION);
         if(opcion==JOptionPane.YES_OPTION){
@@ -351,25 +369,22 @@ public class vermov extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vermov.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vermov.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vermov.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(vermov.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new vermov().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new vermov().setVisible(true);
         });
     }
 

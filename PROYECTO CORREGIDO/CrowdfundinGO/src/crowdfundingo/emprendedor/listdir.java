@@ -27,6 +27,10 @@ public class listdir extends javax.swing.JFrame {
         setIconImage(getIconImage());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
@@ -34,8 +38,15 @@ public class listdir extends javax.swing.JFrame {
     }
 
     Conecccion conect = new Conecccion();
+/**
+ * variable dinero.
+ */    
     public String dinero="";
-    
+/**
+ * Metodo llenar tabla.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */        
     public void llenarTablaProy() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -164,25 +175,22 @@ public class listdir extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(listdir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(listdir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(listdir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(listdir.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new listdir().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new listdir().setVisible(true);
         });
     }
 

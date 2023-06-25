@@ -13,14 +13,23 @@ import java.nio.file.*;
 import java.sql.*;
 import java.util.logging.*;
 import javax.swing.*;
-
+/**
+ * Clase crea proyecto.
+ */    
 public class creaProy extends javax.swing.JFrame {
-
+/**
+ * Constructor de Clase.
+ */    
     public creaProy() {
         initComponents();    
         setIconImage(getIconImage());
     }
 
+    /**
+     *metodo icono de imagen
+     * @return
+     */
+    @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
@@ -29,7 +38,10 @@ public class creaProy extends javax.swing.JFrame {
     static String origen="",narchivo="", destino="";
     Conecccion conect = new Conecccion();
     globalvars var = new globalvars();
-
+/**
+ * metodo elegir imagen.
+     * @throws java.io.FileNotFoundException
+ */    
     public void elegirimg() throws FileNotFoundException {
         JFileChooser selectorArchivos = new JFileChooser();
         selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -49,7 +61,9 @@ public class creaProy extends javax.swing.JFrame {
         }
         System.out.println(narchivo);
     }
-    
+/**
+ * metodo copia imagen.
+ */        
     public void copiarimg(String directorio) throws FileNotFoundException, IOException{
         String imglink = origen;
         try {
@@ -233,7 +247,7 @@ public class creaProy extends javax.swing.JFrame {
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         try {
             conect.insertproyecto(titulo.getText(),lema.getText(),Descrip.getText(),String.valueOf(paislist.getSelectedItem()),narchivo);
-            copiarimg(var.destiny);
+            copiarimg(globalvars.destiny);
         } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(creaProy.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -247,7 +261,10 @@ public class creaProy extends javax.swing.JFrame {
         paislist.setSelectedItem("");
         titulo.requestFocus();
     }//GEN-LAST:event_formWindowClosing
-
+/**
+ * metodo principal.
+     * @param args
+ */    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -256,22 +273,16 @@ public class creaProy extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(creaProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(creaProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(creaProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(creaProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new creaProy().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new creaProy().setVisible(true);
         });
     }
 

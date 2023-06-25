@@ -93,11 +93,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblenun">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Escriba el Titulo de la campa&#xf1;a:"/>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -151,6 +146,11 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblenun">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Escriba el Titulo de la campa&#xf1;a:"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JTextField" name="proys">
     </Component>
     <Component class="javax.swing.JButton" name="buscar">

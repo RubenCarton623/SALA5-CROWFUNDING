@@ -28,6 +28,11 @@ public class modcuenta extends javax.swing.JFrame {
         setIconImage(getIconImage());
     }
     
+    /**
+     *
+     * @metodo obtiene imagen.
+     */
+    @Override
     public Image getIconImage(){
         Image retValue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
@@ -130,7 +135,10 @@ public class modcuenta extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metodo Validar.
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void validar() throws ClassNotFoundException{
         if("".equals(username.getText())){
             JOptionPane.showMessageDialog(null,"[ERROR] - Nombre de usuario en blanco");
@@ -166,7 +174,10 @@ public class modcuenta extends javax.swing.JFrame {
         contra.setText("");
         username.requestFocus();
     }//GEN-LAST:event_formWindowClosing
-
+/**
+ * Metodo principal main.
+     * @param args
+ */    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -175,23 +186,18 @@ public class modcuenta extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(modcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(modcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(modcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(modcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
+        
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new modcuenta().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new modcuenta().setVisible(true);
         });
     }
 

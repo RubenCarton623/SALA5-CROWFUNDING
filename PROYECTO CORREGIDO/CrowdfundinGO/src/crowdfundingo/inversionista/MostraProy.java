@@ -1,7 +1,6 @@
 package crowdfundingo.inversionista;
 
 import crowdfundingo.controladores.globalvars;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -24,20 +23,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.time.LocalDate;
-
+/**
+ * Constructor de Clase.
+ */    
 public class MostraProy extends javax.swing.JFrame {
-
+/**
+ * Constructor de Clase.
+ */    
     public MostraProy() {
         initComponents();
         setIconImage(getIconImage());
         this.imagen.setOpaque(false);
     }
-
+/**
+ * Constructor de Clase.
+ */    
+    @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
     }
-
+/**
+ * Constructor de Clase.
+ */    
     public String titulovar, lemavar, dinerovar, descripcionvar, linkvar;
 
     LocalDate jtime = LocalDate.now();
@@ -51,6 +59,7 @@ public class MostraProy extends javax.swing.JFrame {
 
         private Image imagen;
 
+        @Override
         public void paint(Graphics g) {
             try {
                 imagen = ImageIO.read(new File(getLinkvar()));
@@ -62,33 +71,57 @@ public class MostraProy extends javax.swing.JFrame {
             }
         }
     }
-    
+/**
+ * Constructor de Clase.
+     * @param titulovar
+ */    
     public void setTitulovar(String titulovar) {
         this.titulo.setText(titulovar);
         this.setTitle("Mostrar proyecto - " + titulovar);
     }
-
+/**
+ * Constructor de Clase.
+     * @param lemavar
+ */    
     public void setLemavar(String lemavar) {
         this.lema.setText(lemavar);
     }
-
+/**
+ * Constructor de Clase.
+     * @param dinerovar
+ */    
     public void setDinerovar(String dinerovar) {
         this.money.setText("$" + dinerovar);
     }
-
+/**
+ * Constructor de Clase.
+     * @param descripcionvar
+ */    
     public void setDescripcionvar(String descripcionvar) {
         this.desc.setText("<html>" + descripcionvar + "<html>");
     }
-
+/**
+ * Constructor de Clase.
+     * @param linkvar
+ */    
     public void setLinkvar(String linkvar) {
         this.linkvar = linkvar;
         System.out.println(linkvar);
     }
-
+/**
+ * Constructor de Clase.
+     * @return 
+ */    
     public String getLinkvar() {
         return linkvar;
     }
-    
+/**
+ * Constructor de Clase.
+     * @param don
+     * @param ID
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void donacion(int don, int ID) throws SQLException, ClassNotFoundException{
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -273,13 +306,14 @@ public class MostraProy extends javax.swing.JFrame {
     private void btndonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndonarActionPerformed
         try {
             donacion(Donate.getValue(),Integer.valueOf(globalvars.idproy));
-        } catch (SQLException ex) {
-            Logger.getLogger(MostraProy.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MostraProy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btndonarActionPerformed
-
+/**
+ * Metodo principal.
+     * @param args
+ */    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -293,22 +327,16 @@ public class MostraProy extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MostraProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MostraProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MostraProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MostraProy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MostraProy().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MostraProy().setVisible(true);
         });
     }
 

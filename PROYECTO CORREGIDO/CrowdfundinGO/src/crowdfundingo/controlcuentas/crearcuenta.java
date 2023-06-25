@@ -1,26 +1,29 @@
 package crowdfundingo.controlcuentas;
 
 import crowdfundingo.controladores.Conecccion;
-import crowdfundingo.menuprinc;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+/**
+ * Clase Crea cuenta.
+ */
 public class crearcuenta extends javax.swing.JFrame {
 
     Conecccion conect=new Conecccion();
-    
+/**
+ * Constructor de Clase.
+ */    
     public crearcuenta() {
         initComponents();    
         setIconImage(getIconImage());
     }
-    
+/**
+ * Metodo Optiene Imagen.
+ */    
+    @Override
     public Image getIconImage(){
         Image retValue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
@@ -209,9 +212,7 @@ public class crearcuenta extends javax.swing.JFrame {
             chckval.setSelected(false);
             name.requestFocus();
             this.dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(crearcuenta.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(crearcuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btncreaActionPerformed
@@ -219,7 +220,10 @@ public class crearcuenta extends javax.swing.JFrame {
     private void tcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tcuentaActionPerformed
 
     }//GEN-LAST:event_tcuentaActionPerformed
-
+/**
+ * Metodo Principal Main.
+     * @param args
+ */    
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -227,21 +231,15 @@ public class crearcuenta extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(crearcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(crearcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(crearcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(crearcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new crearcuenta().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new crearcuenta().setVisible(true);
         });
     }
 

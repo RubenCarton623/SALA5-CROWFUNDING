@@ -27,12 +27,21 @@ public class buscaproye extends javax.swing.JFrame {
         setIconImage(getIconImage());
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
     }
-
+/**
+ * Constructor de Clase.
+     * @param titulo
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void llenarTablaProy(String titulo) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn, "crowdfundingo", "12345");
@@ -47,7 +56,11 @@ public class buscaproye extends javax.swing.JFrame {
         System.out.println(rs);
         ProyTables.setModel(DbUtils.resultSetToTableModel(rs));
     }
-
+/**
+ * Constructor de Clase.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void llenarTablaProy() throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn, "crowdfundingo", "12345");
@@ -61,7 +74,12 @@ public class buscaproye extends javax.swing.JFrame {
 
     MostraProy mp = new MostraProy();
     String idvar;
-
+/**
+ * Constructor de Clase.
+     * @param ID
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+ */    
     public void mostrarDatos(String ID) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection con = DriverManager.getConnection(globalvars.conn, "crowdfundingo", "12345");
@@ -97,13 +115,13 @@ public class buscaproye extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblenun = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ProyTables = new javax.swing.JTable(){
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
+        lblenun = new javax.swing.JLabel();
         proys = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -123,8 +141,6 @@ public class buscaproye extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-
-        lblenun.setText("Escriba el Titulo de la campaña:");
 
         ProyTables.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,6 +176,8 @@ public class buscaproye extends javax.swing.JFrame {
             ProyTables.getColumnModel().getColumn(2).setResizable(false);
             ProyTables.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        lblenun.setText("Escriba el Titulo de la campaña:");
 
         buscar.setText("Refrescar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -234,9 +252,7 @@ public class buscaproye extends javax.swing.JFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         try {
             llenarTablaProy(proys.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(buscaproye.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(buscaproye.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buscarActionPerformed
@@ -244,21 +260,17 @@ public class buscaproye extends javax.swing.JFrame {
     private void mostraIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraIDActionPerformed
         try {
             mostrarDatos(id_entr.getText());
-        } catch (SQLException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(buscaproye.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "No se encuentra tal proyecto");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(buscaproye.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mostraIDActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             llenarTablaProy();
-        } catch (SQLException ex) {
-            Logger.getLogger(buscaproye.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(buscaproye.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
@@ -279,22 +291,16 @@ public class buscaproye extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(buscaproye.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(buscaproye.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(buscaproye.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(buscaproye.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new buscaproye().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new buscaproye().setVisible(true);
         });
     }
 

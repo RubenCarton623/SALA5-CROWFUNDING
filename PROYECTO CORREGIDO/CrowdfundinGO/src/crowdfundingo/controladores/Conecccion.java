@@ -1,17 +1,27 @@
 package crowdfundingo.controladores;
 
 import java.sql.*;
-import java.util.Random;
-import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import oracle.jdbc.driver.OracleDriver;
-
+/**
+* Clase Coneccion a la base de datos.
+*/
 public class Conecccion {
-
+/**
+* Variable nombre.
+*/
     public String NOMBRESG = "";
+/**
+* Variable id iidentificador.
+*/
     public String id = "";
-    
+/**
+* Metodo de coneccion con la base.
+     * @param username
+     * @param Pass
+     * @return 
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+*/
     public String coneccion(String username, String Pass) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver");  
         String a = "";
@@ -20,7 +30,7 @@ public class Conecccion {
         Statement s = con.createStatement();
         s.execute("SELECT USUARIO, CONTRASEÑA,NOMBRES,APELLIDOS FROM USUARIO WHERE USUARIO='" + username + "' AND CONTRASEÑA='" + Pass + "'");
         ResultSet rs = s.getResultSet();
-        System.out.println(rs.getRow());
+
         while (rs.next()) {
             a = rs.getString("USUARIO") + ";" + rs.getString("CONTRASEÑA");
             this.NOMBRESG = rs.getString("NOMBRES") + " " + rs.getString("APELLIDOS");
@@ -28,7 +38,12 @@ public class Conecccion {
 
         return a;
     }
-
+/**
+* Metodo de obtiene id.
+     * @param username
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+*/
     public void getID(String username) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver"); 
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -40,7 +55,13 @@ public class Conecccion {
             globalvars.id = rs.getString("ID");
         }
     }
-
+/**
+* Metodo de obtiene nombre.
+     * @param ID
+     * @return 
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+*/
     public String getNames(String ID) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver"); 
         String names = "";
@@ -54,7 +75,18 @@ public class Conecccion {
         }
         return names;
     }
-
+/**
+* Metodo de inserta usuario.
+     * @param Nombres
+     * @param Apellidos
+     * @param username
+     * @param Pass
+     * @param Bancuenta
+     * @param Banco
+     * @param tipoc
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+*/
      public void insertUser(String Nombres, String Apellidos, String username, String Pass, String Bancuenta, String Banco, String tipoc) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver"); 
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -62,7 +94,7 @@ public class Conecccion {
         Statement s = con.createStatement();
         String ide = rand(1, 9999);
         System.out.print(ide);     
-        String idebank = "";
+        String idebank;
         String temporalID = "";
         System.out.print(ide);
         //CREACIÓN DE CUENTA BANCARIA
@@ -94,7 +126,16 @@ public class Conecccion {
             JOptionPane.showMessageDialog(null, "Usuario: " + Nombres + " " + Apellidos + ", creado.");
         }   
     }
-
+/**
+* Metodo de registra proyecto.
+     * @param titulo
+     * @param lema
+     * @param Descripcion
+     * @param Pais
+     * @param link
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+*/
     public void insertproyecto(String titulo, String lema, String Descripcion, String Pais, String link) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver"); 
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -124,7 +165,13 @@ public class Conecccion {
             JOptionPane.showMessageDialog(null, "Proyecto creado.");
         }
     }
-    
+/**
+* Metodo de obtiene passwaord.
+     * @param username
+     * @param Pass
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+*/
     public void chgpass(String username, String Pass) throws SQLException, ClassNotFoundException {
         Class.forName("oracle.jdbc.driver.OracleDriver"); 
         Connection con = DriverManager.getConnection(globalvars.conn,"crowdfundingo","12345");
@@ -144,7 +191,12 @@ public class Conecccion {
         }
         
     }
-
+/**
+* Metodo de obtiene clave random.
+     * @param min
+     * @param max
+     * @return 
+*/
     public static String rand(int min, int max) {
         String randomNum = String.valueOf(Math.floor(Math.random() * (max - min)));
         return randomNum;

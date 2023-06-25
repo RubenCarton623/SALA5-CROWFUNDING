@@ -1,7 +1,6 @@
 package crowdfundingo;
 
 import crowdfundingo.emprendedor.listproy;
-import crowdfundingo.inversionista.MostraProy;
 import crowdfundingo.controladores.*;
 import crowdfundingo.controlcuentas.listusuarios;
 import crowdfundingo.emprendedor.*;
@@ -11,17 +10,26 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-
+/**
+* Clase Menu principal.
+*/
 public class menuprinc extends javax.swing.JFrame {
 
     FondoPanel fondo = new FondoPanel();
-    
+/**
+* Constructor clase Menu principal.
+*/
     public menuprinc() {
         initComponents();
         setIconImage(getIconImage());
         this.setContentPane(fondo);
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("res/ico.png"));
         return retValue;
@@ -31,6 +39,7 @@ public class menuprinc extends javax.swing.JFrame {
 
         private Image imagen;
 
+        @Override
         public void paint(Graphics g) {
             imagen = new ImageIcon(ClassLoader.getSystemResource("res/ilus.png")).getImage();
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
@@ -282,23 +291,17 @@ public class menuprinc extends javax.swing.JFrame {
          */
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menuprinc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menuprinc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menuprinc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(menuprinc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new menuprinc().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new menuprinc().setVisible(true);
         });
     }
 
